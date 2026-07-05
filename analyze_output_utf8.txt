@@ -1,0 +1,68 @@
+﻿Analyzing final-project...                                      
+
+  error - Invalid constant value - lib\core\theme\app_theme.dart:60:30 - invalid_constant
+  error - The values in a const list literal must be constants - lib\core\theme\app_theme.dart:60:30 - non_constant_list_element
+  error - The getter 'white02' isn't defined for the type 'Colors' - lib\core\theme\app_theme.dart:60:37 - undefined_getter
+  error - Invalid constant value - lib\core\theme\app_theme.dart:127:47 - invalid_constant
+  error - The getter 'white05' isn't defined for the type 'Colors' - lib\core\theme\app_theme.dart:127:54 - undefined_getter
+   info - The constant name 'INCOME' isn't a lowerCamelCase identifier - lib\models\app_models.dart:1:21 - constant_identifier_names
+   info - The constant name 'EXPENSE' isn't a lowerCamelCase identifier - lib\models\app_models.dart:1:29 - constant_identifier_names
+   info - The imported package 'http_parser' isn't a dependency of the importing package - lib\repositories\auth_repository.dart:5:8 - depend_on_referenced_packages
+   info - The imported package 'http_parser' isn't a dependency of the importing package - lib\repositories\transaction_repository.dart:5:8 - depend_on_referenced_packages
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\auth\login_screen.dart:88:56 - deprecated_member_use
+  error - The argument type 'Type' can't be assigned to the parameter type 'TextAlign?'.  - lib\views\auth\login_screen.dart:106:34 - argument_type_not_assignable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\budgets_goals_tab.dart:142:66 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\budgets_goals_tab.dart:366:38 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\budgets_goals_tab.dart:396:38 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\budgets_goals_tab.dart:464:42 - use_build_context_synchronously
+  error - Expected an identifier - lib\views\dashboard\tabs\budgets_goals_tab.dart:594:45 - missing_identifier
+  error - Invalid constant value - lib\views\dashboard\tabs\budgets_goals_tab.dart:594:45 - invalid_constant
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\views\dashboard\tabs\budgets_goals_tab.dart:602:17 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\views\dashboard\tabs\budgets_goals_tab.dart:624:17 - deprecated_member_use
+  error - Expected an identifier - lib\views\dashboard\tabs\budgets_goals_tab.dart:787:46 - missing_identifier
+  error - Invalid constant value - lib\views\dashboard\tabs\budgets_goals_tab.dart:787:46 - invalid_constant
+   info - The private field _selectedYear could be 'final' - lib\views\dashboard\tabs\home_analytics_tab.dart:22:7 - prefer_final_fields
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\views\dashboard\tabs\home_analytics_tab.dart:49:15 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\views\dashboard\tabs\home_analytics_tab.dart:49:21 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - lib\views\dashboard\tabs\home_analytics_tab.dart:54:30 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:181:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:203:38 - deprecated_member_use
+  error - The getter 'white05' isn't defined for the type 'Colors' - lib\views\dashboard\tabs\home_analytics_tab.dart:262:42 - undefined_getter
+  error - The getter 'white05' isn't defined for the type 'Colors' - lib\views\dashboard\tabs\home_analytics_tab.dart:307:42 - undefined_getter
+  error - The getter 'white05' isn't defined for the type 'Colors' - lib\views\dashboard\tabs\home_analytics_tab.dart:453:25 - undefined_getter
+  error - The getter 'white05' isn't defined for the type 'Colors' - lib\views\dashboard\tabs\home_analytics_tab.dart:479:42 - undefined_getter
+  error - The named parameter 'meta' is required, but there's no corresponding argument - lib\views\dashboard\tabs\home_analytics_tab.dart:531:36 - missing_required_argument
+  error - The named parameter 'axisSide' isn't defined - lib\views\dashboard\tabs\home_analytics_tab.dart:532:31 - undefined_named_parameter
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:558:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:573:49 - deprecated_member_use
+  error - Target of URI doesn't exist: '../auth/login_screen.dart' - lib\views\dashboard\tabs\settings_profile_tab.dart:7:8 - uri_does_not_exist
+   info - Don't use 'BuildContext's across async gaps - lib\views\dashboard\tabs\settings_profile_tab.dart:36:54 - use_build_context_synchronously
+  error - The method 'updateAvatar' isn't defined for the type 'AuthProvider' - lib\views\dashboard\tabs\settings_profile_tab.dart:37:42 - undefined_method
+  error - The method 'updateProfileNames' isn't defined for the type 'AuthProvider' - lib\views\dashboard\tabs\settings_profile_tab.dart:94:50 - undefined_method
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:97:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:101:40 - use_build_context_synchronously
+  error - The method 'changeEmail' isn't defined for the type 'AuthProvider' - lib\views\dashboard\tabs\settings_profile_tab.dart:142:50 - undefined_method
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:145:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:149:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:208:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:212:40 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\settings_profile_tab.dart:249:58 - deprecated_member_use
+  error - The class 'EdgeInsets' doesn't have a constant constructor 'top' - lib\views\dashboard\tabs\settings_profile_tab.dart:302:44 - const_with_undefined_constructor
+  error - The getter 'white05' isn't defined for the type 'Colors' - lib\views\dashboard\tabs\settings_profile_tab.dart:305:35 - undefined_getter
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:361:34 - use_build_context_synchronously
+  error - The name 'LoginScreen' isn't a class - lib\views\dashboard\tabs\settings_profile_tab.dart:362:63 - creation_with_non_type
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\transactions_tab.dart:124:105 - deprecated_member_use
+   info - Unnecessary use of multiple underscores - lib\views\dashboard\tabs\transactions_tab.dart:267:39 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\views\dashboard\tabs\transactions_tab.dart:267:43 - unnecessary_underscores
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\transactions_tab.dart:330:38 - use_build_context_synchronously
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\views\dashboard\tabs\transactions_tab.dart:501:17 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\settings\category_management_screen.dart:95:98 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\settings\category_management_screen.dart:127:96 - deprecated_member_use
+  error - The method 'createCategory' isn't defined for the type 'CategoryProvider' - lib\views\settings\category_management_screen.dart:161:55 - undefined_method
+  error - Too many positional arguments: 2 expected, but 3 found - lib\views\settings\category_management_screen.dart:163:96 - extra_positional_arguments
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:168:50 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:172:50 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:211:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:215:40 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\settings\category_management_screen.dart:266:99 - deprecated_member_use
+

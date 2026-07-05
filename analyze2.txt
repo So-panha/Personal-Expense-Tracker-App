@@ -1,0 +1,61 @@
+﻿Analyzing final-project...                                      
+
+   info - The constant name 'INCOME' isn't a lowerCamelCase identifier - lib\models\app_models.dart:1:21 - constant_identifier_names
+   info - The constant name 'EXPENSE' isn't a lowerCamelCase identifier - lib\models\app_models.dart:1:29 - constant_identifier_names
+   info - The imported package 'http_parser' isn't a dependency of the importing package - lib\repositories\auth_repository.dart:5:8 - depend_on_referenced_packages
+   info - The imported package 'http_parser' isn't a dependency of the importing package - lib\repositories\transaction_repository.dart:5:8 - depend_on_referenced_packages
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\auth\login_screen.dart:88:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\budgets_goals_tab.dart:142:66 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\budgets_goals_tab.dart:366:38 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\budgets_goals_tab.dart:396:38 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\budgets_goals_tab.dart:464:42 - use_build_context_synchronously
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\views\dashboard\tabs\budgets_goals_tab.dart:602:17 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\views\dashboard\tabs\budgets_goals_tab.dart:624:17 - deprecated_member_use
+   info - The private field _selectedYear could be 'final' - lib\views\dashboard\tabs\home_analytics_tab.dart:22:7 - prefer_final_fields
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\views\dashboard\tabs\home_analytics_tab.dart:49:15 - deprecated_member_use
+   info - 'shareXFiles' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\views\dashboard\tabs\home_analytics_tab.dart:49:21 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - lib\views\dashboard\tabs\home_analytics_tab.dart:54:30 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:181:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:203:38 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:558:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\home_analytics_tab.dart:573:49 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - lib\views\dashboard\tabs\settings_profile_tab.dart:35:54 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:96:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:100:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:144:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:148:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:207:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:211:40 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\settings_profile_tab.dart:248:58 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\settings_profile_tab.dart:360:34 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\dashboard\tabs\transactions_tab.dart:124:105 - deprecated_member_use
+   info - Unnecessary use of multiple underscores - lib\views\dashboard\tabs\transactions_tab.dart:267:39 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\views\dashboard\tabs\transactions_tab.dart:267:43 - unnecessary_underscores
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\dashboard\tabs\transactions_tab.dart:330:38 - use_build_context_synchronously
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\views\dashboard\tabs\transactions_tab.dart:501:17 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\settings\category_management_screen.dart:95:98 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\settings\category_management_screen.dart:127:96 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:168:50 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:172:50 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:211:40 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\views\settings\category_management_screen.dart:215:40 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\views\settings\category_management_screen.dart:266:99 - deprecated_member_use
+
+flutter : 40 issues 
+found. (ran in 7.0s)
+At line:1 char:1
++ flutter analyze 2>&1 
+| Out-File -Encoding 
+UTF8 analyze2.txt; 
+Get-Cont ...
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (40 issues fou   
+ nd. (ran in 7.0s):    
+String) [], Remote    
+Exception
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
