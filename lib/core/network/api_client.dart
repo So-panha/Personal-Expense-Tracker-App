@@ -8,11 +8,15 @@ class ApiClient {
   // Base URL configuration - supports Web/Desktop and Android Emulator
   static String get defaultBaseUrl {
     if (kIsWeb) {
-      return 'https://ant-g2-pet.tt.linkpc.net/api/v1';
+      // return 'https://ant-g2-pet.tt.linkpc.net/api/v1';
+      return 'http://localhost:3000/api/v1';
+      
     }
     // Android emulator loops back to machine via 10.0.2.2
-    // If not Web, we can default to localhost for desktop/ios or this
-    return 'https://ant-g2-pet.tt.linkpc.net/api/v1';
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return 'http://10.0.2.2:3000/api/v1';
+    }
+    return 'http://localhost:3000/api/v1';
   }
 
   late final Dio dio;

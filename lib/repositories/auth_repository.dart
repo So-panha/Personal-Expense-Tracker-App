@@ -206,4 +206,46 @@ class AuthRepository {
       throw Exception(_getErrorMessage(e));
     }
   }
+
+  Future<Map<String, dynamic>> loginWithGoogle(String idToken) async {
+    try {
+      final response = await apiClient.dio.post('/auth/google', data: {
+        'idToken': idToken,
+      });
+      final envelope = response.data as Map<String, dynamic>;
+      final data = (envelope['data'] as Map<String, dynamic>?) ?? envelope;
+      final token = data['token'] as String? ?? data['jwt_token'] as String? ?? '';
+      if (token.isNotEmpty) {
+        await apiClient.saveToken(token);
+      }
+      UserModel? user;
+      if (data['user'] != null) {
+        user = UserModel.fromJson(data['user'] as Map<String, dynamic>);
+      }
+      return {'token': token, 'user': user};
+    } on DioException catch (e) {
+      throw Exception(_getErrorMessage(e));
+    }
+  }
+
+  Future<Map<String, dynamic>> loginWithFacebook(String accessToken) async {
+    try {
+      final response = await apiClient.dio.post('/auth/facebook', data: {
+        'accessToken': accessToken,
+      });
+      final envelope = response.data as Map<String, dynamic>;
+      final data = (envelope['data'] as Map<String, dynamic>?) ?? envelope;
+      final token = data['token'] as String? ?? data['jwt_token'] as String? ?? '';
+      if (token.isNotEmpty) {
+        await apiClient.saveToken(token);
+      }
+      UserModel? user;
+      if (data['user'] != null) {
+        user = UserModel.fromJson(data['user'] as Map<String, dynamic>);
+      }
+      return {'token': token, 'user': user};
+    } on DioException catch (e) {
+      throw Exception(_getErrorMessage(e));
+    }
+  }
 }

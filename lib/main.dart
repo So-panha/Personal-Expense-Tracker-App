@@ -16,6 +16,7 @@ import 'providers/budget_provider.dart';
 import 'providers/goal_provider.dart';
 import 'providers/transaction_provider.dart';
 import 'providers/analytics_provider.dart';
+import 'providers/theme_provider.dart';
 
 import 'views/auth/login_screen.dart';
 import 'views/dashboard/dashboard_screen.dart';
@@ -35,6 +36,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider(authRepo)),
         ChangeNotifierProvider(create: (_) => CategoryProvider(categoryRepo)),
         ChangeNotifierProvider(create: (_) => BudgetProvider(budgetRepo)),
@@ -52,10 +54,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       title: 'Personal Expense Tracker',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeProvider.themeMode,
       home: const AuthWrapper(),
     );
   }

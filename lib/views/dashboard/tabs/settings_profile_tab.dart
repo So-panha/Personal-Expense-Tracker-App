@@ -5,6 +5,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../providers/auth_provider.dart';
 import '../../auth/login_screen.dart';
 import '../../settings/category_management_screen.dart';
+import '../../../providers/theme_provider.dart';
 
 class SettingsProfileTab extends StatefulWidget {
   const SettingsProfileTab({super.key});
@@ -71,7 +72,7 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Update Profile Name'),
         content: TextField(
           controller: _nameController,
@@ -117,7 +118,7 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Change Registered Email'),
         content: TextField(
           controller: _emailController,
@@ -165,7 +166,7 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Change Password'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -262,7 +263,7 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
                         decoration: BoxDecoration(
                           color: AppColors.primary,
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.darkBg, width: 2),
+                          border: Border.all(color: Theme.of(context).scaffoldBackgroundColor, width: 2),
                         ),
                         child: IconButton(
                           padding: EdgeInsets.zero,
@@ -346,6 +347,12 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
                 },
               ),
 
+              const SizedBox(height: 24),
+              const Text('PREFERENCES', style: TextStyle(color: AppColors.textMuted, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+              const SizedBox(height: 12),
+
+              _buildThemeToggleTile(context),
+
               const SizedBox(height: 48),
 
               // Logout CTA Button
@@ -370,7 +377,7 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Confirm Log Out'),
         content: const Text('Are you sure you want to end your session?'),
         actions: [
@@ -403,7 +410,7 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
     required VoidCallback onTap,
   }) {
     return Card(
-      color: AppColors.darkCard,
+      color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
@@ -411,6 +418,31 @@ class _SettingsProfileTabState extends State<SettingsProfileTab> {
         leading: Icon(icon, color: AppColors.primary),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
         trailing: const Icon(Icons.chevron_right, color: AppColors.textSecondary, size: 20),
+      ),
+    );
+  }
+
+  Widget _buildThemeToggleTile(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return Card(
+      color: Theme.of(context).cardColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        leading: Icon(
+          themeProvider.isDarkMode ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+          color: AppColors.primary,
+        ),
+        title: const Text(
+          'Dark Theme Mode',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+        trailing: Switch(
+          value: themeProvider.isDarkMode,
+          onChanged: (val) {
+            themeProvider.toggleTheme();
+          },
+        ),
       ),
     );
   }

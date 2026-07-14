@@ -60,7 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.textMuted,
         showSelectedLabels: true,

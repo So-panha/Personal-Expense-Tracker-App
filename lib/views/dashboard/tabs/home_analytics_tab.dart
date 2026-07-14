@@ -164,12 +164,12 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
           children: [
             Text(
               'Good day,',
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+              style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary, fontSize: 14),
             ),
             Text(
               fullName,
-              style: const TextStyle(
-                color: AppColors.textPrimary,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -257,9 +257,14 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: AppColors.darkCard,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x0DFFFFFF), width: 1),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color(0x0DFFFFFF)
+              : const Color(0x0D000000),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +274,11 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
             children: [
               Text(
                 title,
-                style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Container(
                 height: 26,
@@ -285,8 +294,8 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
           const SizedBox(height: 10),
           Text(
             value,
-            style: const TextStyle(
-              color: AppColors.textPrimary,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -302,9 +311,13 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.darkCard,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0x0DFFFFFF)),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color(0x0DFFFFFF)
+              : const Color(0x0D000000),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -312,10 +325,10 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Spending Distribution',
                 style: TextStyle(
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -403,7 +416,10 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
                     const SizedBox(width: 4),
                     Text(
                       '${item.categoryName} (${_formatCurrency(item.totalAmount)})',
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                        fontSize: 11,
+                      ),
                     )
                   ],
                 );
@@ -420,7 +436,7 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
       onTap: () async {
         final monthStr = await showModalBottomSheet<String>(
           context: context,
-          backgroundColor: AppColors.darkCard,
+          backgroundColor: Theme.of(context).cardColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
@@ -450,7 +466,9 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
-          color: const Color(0x0DFFFFFF),
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color(0x0DFFFFFF)
+              : const Color(0x0D000000),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -458,10 +476,17 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
           children: [
             Text(
               DateFormat('MMMM').format(DateTime(2026, _selectedMonth)),
-              style: const TextStyle(color: AppColors.textPrimary, fontSize: 12),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                fontSize: 12,
+              ),
             ),
             const SizedBox(width: 4),
-            const Icon(Icons.arrow_drop_down, color: AppColors.textSecondary, size: 16),
+            Icon(
+              Icons.arrow_drop_down,
+              color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+              size: 16,
+            ),
           ],
         ),
       ),
@@ -474,17 +499,21 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.darkCard,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0x0DFFFFFF)),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color(0x0DFFFFFF)
+              : const Color(0x0D000000),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
+          Text(
             'Spending Trends (6 months)',
             style: TextStyle(
-              color: AppColors.textPrimary,
+              color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -532,7 +561,10 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
                               meta: meta,
                               child: Text(
                                 mName,
-                                style: const TextStyle(color: AppColors.textSecondary, fontSize: 9),
+                                style: TextStyle(
+                                  color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                  fontSize: 9,
+                                ),
                               ),
                             );
                           }
@@ -603,7 +635,10 @@ class _HomeAnalyticsTabState extends State<HomeAnalyticsTab> {
         const SizedBox(width: 8),
         Text(
           label,
-          style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+            fontSize: 11,
+          ),
         )
       ],
     );

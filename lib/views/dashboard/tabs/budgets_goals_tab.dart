@@ -45,6 +45,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Targets & Budgets'),
         backgroundColor: Colors.transparent,
@@ -52,7 +53,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: AppColors.primary,
-          labelColor: AppColors.textPrimary,
+          labelColor: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
           unselectedLabelColor: AppColors.textMuted,
           labelStyle: const TextStyle(fontWeight: FontWeight.bold),
           tabs: const [
@@ -120,7 +121,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
                           }
 
                           return Card(
-                            color: AppColors.darkCard,
+                            color: Theme.of(context).cardColor,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             margin: const EdgeInsets.only(bottom: 16),
                             child: Padding(
@@ -156,13 +157,14 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
                                     style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
                                   ),
                                   const SizedBox(height: 16),
-                                  // Progress Bar
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(4),
                                     child: LinearProgressIndicator(
                                       value: percent.clamp(0.0, 1.0),
                                       minHeight: 8,
-                                      backgroundColor: Colors.white10,
+                                      backgroundColor: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white10
+                                          : Colors.black12,
                                       valueColor: AlwaysStoppedAnimation<Color>(progressColor),
                                     ),
                                   ),
@@ -172,11 +174,18 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
                                     children: [
                                       Text(
                                         'Used: ${_formatCurrency(budget.spentAmount)}',
-                                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       Text(
                                         'Limit: ${_formatCurrency(budget.limitAmount)}',
-                                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                          fontSize: 12,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -253,7 +262,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
                               : 0.0;
 
                           return Card(
-                            color: AppColors.darkCard,
+                            color: Theme.of(context).cardColor,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             margin: const EdgeInsets.only(bottom: 16),
                             child: Padding(
@@ -280,7 +289,9 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
                                     child: LinearProgressIndicator(
                                       value: percent.clamp(0.0, 1.0),
                                       minHeight: 8,
-                                      backgroundColor: Colors.white10,
+                                      backgroundColor: Theme.of(context).brightness == Brightness.dark
+                                          ? Colors.white10
+                                          : Colors.black12,
                                       valueColor: const AlwaysStoppedAnimation<Color>(AppColors.income),
                                     ),
                                   ),
@@ -294,7 +305,10 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
                                       ),
                                       Text(
                                         'Target: ${_formatCurrency(goal.targetAmount)} (${(percent*100).toStringAsFixed(0)}%)',
-                                        style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                          fontSize: 12,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -349,13 +363,18 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Remove Budget?'),
         content: const Text('Are you sure you want to delete this category-specific budget limit?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary)),
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+              ),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.expense),
@@ -379,13 +398,18 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Remove Goal?'),
         content: const Text('Are you sure you want to delete this target goal?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary)),
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+              ),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.expense),
@@ -409,7 +433,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.darkCard,
+      backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         return _BudgetForm(budget: budget, onSaved: _refreshData);
@@ -421,7 +445,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.darkCard,
+      backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         return _GoalForm(goal: goal, onSaved: _refreshData);
@@ -434,7 +458,7 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: Text('Add Savings to ${goal.name}'),
         content: TextField(
           controller: progressController,
@@ -447,7 +471,12 @@ class _BudgetsGoalsTabState extends State<BudgetsGoalsTab> with SingleTickerProv
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary)),
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+              ),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.income),
@@ -575,7 +604,11 @@ class _BudgetFormState extends State<_BudgetForm> {
             children: [
               Text(
                 isEdit ? 'Modify Budget Limit' : 'Configure New Budget',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                ),
               ),
               const SizedBox(height: 24),
 
@@ -602,7 +635,7 @@ class _BudgetFormState extends State<_BudgetForm> {
                 value: categories.any((cat) => cat.id == _selectedCategoryId)
                     ? _selectedCategoryId
                     : null,
-                dropdownColor: AppColors.darkCard,
+                dropdownColor: Theme.of(context).cardColor,
                 decoration: const InputDecoration(
                   hintText: 'Choose Category',
                   prefixIcon: Icon(Icons.category_outlined, color: AppColors.textMuted),
@@ -631,7 +664,7 @@ class _BudgetFormState extends State<_BudgetForm> {
               // Month Selector row dropdown
               DropdownButtonFormField<int>(
                 value: _selectedMonth,
-                dropdownColor: AppColors.darkCard,
+                dropdownColor: Theme.of(context).cardColor,
                 decoration: const InputDecoration(
                   hintText: 'Month',
                   prefixIcon: Icon(Icons.calendar_month, color: AppColors.textMuted),
@@ -763,7 +796,11 @@ class _GoalFormState extends State<_GoalForm> {
             children: [
               Text(
                 isEdit ? 'Modify Goal Configs' : 'New Savings Target',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                ),
               ),
               const SizedBox(height: 24),
 
@@ -817,8 +854,13 @@ class _GoalFormState extends State<_GoalForm> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: AppColors.darkCard,
-                    border: Border.all(color: Colors.white24, width: 1),
+                    color: Theme.of(context).cardColor,
+                    border: Border.all(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white24
+                          : Colors.black26,
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -827,7 +869,10 @@ class _GoalFormState extends State<_GoalForm> {
                       const SizedBox(width: 12),
                       Text(
                         'Target Deadline: ${DateFormat('yyyy-MM-dd').format(_selectedDeadline)}',
-                        style: const TextStyle(color: AppColors.textPrimary, fontSize: 14),
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                          fontSize: 14,
+                        ),
                       ),
                     ],
                   ),

@@ -1,4 +1,6 @@
+# ====================
 # Miscellaneous
+# ====================
 *.class
 *.log
 *.pyc
@@ -8,19 +10,34 @@
 .buildlog/
 .history
 .svn/
-migrate.txt
 
-# IntelliJ Related
+# Temporary analysis/debug output files
+migrate.txt
+analyze2.txt
+analyze_out.txt
+analyze_output.txt
+analyze_output_utf8.txt
+filter_out.txt
+scan_results.txt
+test_login.dart
+
+# ====================
+# IntelliJ / Android Studio
+# ====================
 .idea/
 *.iml
 *.ipr
 *.iws
 .idea_modules/
 
-# Visual Studio Code Related
+# ====================
+# Visual Studio Code
+# ====================
 .vscode/
 
-# Flutter/Dart/Pub Related
+# ====================
+# Flutter / Dart / Pub
+# ====================
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -31,17 +48,40 @@ migrate.txt
 .pub/
 /build/
 
-# Android Related
+# ====================
+# Firebase / Secrets
+# ====================
+# Firebase config - contains API keys, DO NOT commit
+lib/firebase_options.dart
+google-services.json
+GoogleService-Info.plist
+.firebase/
+firebase.json
+.firebaserc
+
+# Environment / secret files
+.env
+.env.*
+secrets.dart
+**/secrets/
+
+# ====================
+# Android
+# ====================
 **/android/app/key.properties
+**/android/local.properties
 **/android/app/local.properties
 **/android/app/shared_preferences.xml
 **/android/assets/cfg.json
 **/*.apk
 **/*.ap_
 **/*.app
-**/*.gp
+**/*.keystore
+**/*.jks
 
-# iOS/macOS Related
+# ====================
+# iOS / macOS
+# ====================
 **/ios/Flutter/App.framework
 **/ios/Flutter/Flutter.framework
 **/ios/Flutter/Generated.xcconfig
@@ -55,20 +95,30 @@ migrate.txt
 **/*.xcworkspace
 **/xcuserdata/
 
-# Web Related
-.firebase/
+# ====================
+# Web
+# ====================
+# (Firebase hosting config kept above)
 
-# Windows Related
+# ====================
+# Windows
+# ====================
 **/windows/flutter/ephemeral/
 **/*.exe
 **/*.dll
 **/*.pdb
 
-# macOS Related
+# ====================
+# macOS
+# ====================
 **/macos/flutter/ephemeral/
 
-# Linux Related
+# ====================
+# Linux
+# ====================
 **/linux/flutter/ephemeral/
 
+# ====================
 # Coverage
+# ====================
 coverage/

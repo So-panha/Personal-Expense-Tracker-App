@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import '../models/app_models.dart';
 import '../repositories/auth_repository.dart';
 
@@ -250,6 +252,69 @@ class AuthProvider extends ChangeNotifier {
           role: _currentUser!.role,
           avatar: null,
         );
+      }
+      return true;
+    } catch (e) {
+      _setError(e.toString().replaceAll('Exception: ', ''));
+      return false;
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  Future<bool> loginWithGoogle() async {
+    _setLoading(true);
+    _setError(null);
+    try {
+      final googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        // User cancelled the sign-in
+        _setLoading(false);
+        return false;
+      }
+      final googleAuth = await googleUser.authentication;
+      final idToken = googleAuth.idToken;
+      if (idToken == null) {
+        throw Exception('Could not get Google ID token');
+      }
+      final result = await authRepository.loginWithGoogle(idToken);
+      _isAuthenticated = true;
+      if (result['user'] != null) {
+        _currentUser = result['user'] as UserModel;
+      } else {
+        _currentUser = await authRepository.getProfile();
+      }
+      return true;
+    } catch (e) {
+      _setError(e.toString().replaceAll('Exception: ', ''));
+      return false;
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  Future<bool> loginWithFacebook() async {
+    _setLoading(true);
+    _setError(null);
+    try {
+      final loginResult = await FacebookAuth.instance.login(
+        permissions: ['email', 'public_profile'],
+      );
+      if (loginResult.status != LoginStatus.success) {
+        _setLoading(false);
+        return false;
+      }
+      final accessToken = loginResult.accessToken?.tokenString;
+      if (accessToken == null) {
+        throw Exception('Could not get Facebook access token');
+      }
+      final result = await authRepository.loginWithFacebook(accessToken);
+      _isAuthenticated = true;
+      if (result['user'] != null) {
+        _currentUser = result['user'] as UserModel;
+      } else {
+        _currentUser = await authRepository.getProfile();
       }
       return true;
     } catch (e) {

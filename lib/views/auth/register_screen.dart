@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
+import 'social_auth_button.dart';
+import 'otp_screen.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -41,13 +44,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     if (mounted) {
       if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Registration successful! Please login.'),
-            backgroundColor: AppColors.income,
+        // Navigate to OTP screen with the registered email pre-filled.
+        // OtpScreen will auto-send the OTP so the user just enters the code.
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => OtpScreen(email: _emailController.text.trim()),
           ),
         );
-        Navigator.of(context).pop();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -216,6 +219,69 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onPressed: _submit,
                             child: const Text('Sign Up'),
                           ),
+                    const SizedBox(height: 24),
+
+                    // ─────── Social sign-up ───────
+                    Row(
+                      children: [
+                        const Expanded(child: Divider(color: Colors.white24)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            'or sign up with',
+                            style: TextStyle(
+                              color: AppColors.textMuted,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                        const Expanded(child: Divider(color: Colors.white24)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+
+                    SocialAuthButton(
+                      label: 'Sign up with Google',
+                      iconAsset: 'assets/images/google.png',
+                      isLoading: authProvider.isLoading,
+                      onPressed: () async {
+                        final success = await authProvider.loginWithGoogle();
+                        if (mounted && success) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (_) => const DashboardScreen()),
+                          );
+                        } else if (mounted && authProvider.error != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(authProvider.error!),
+                              backgroundColor: AppColors.expense,
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 12),
+
+                    SocialAuthButton(
+                      label: 'Sign up with Facebook',
+                      iconAsset: 'assets/images/facebook.png',
+                      isLoading: authProvider.isLoading,
+                      onPressed: () async {
+                        final success = await authProvider.loginWithFacebook();
+                        if (mounted && success) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (_) => const DashboardScreen()),
+                          );
+                        } else if (mounted && authProvider.error != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(authProvider.error!),
+                              backgroundColor: AppColors.expense,
+                            ),
+                          );
+                        }
+                      },
+                    ),
                     const SizedBox(height: 24),
 
                     // Login Link

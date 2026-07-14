@@ -50,7 +50,7 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.darkCard,
+      backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         return StatefulBuilder(
@@ -93,19 +93,31 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               decoration: BoxDecoration(
                                 color: _selectedType == CategoryType.EXPENSE ? AppColors.expense.withOpacity(0.12) : Colors.transparent,
-                                border: Border.all(color: _selectedType == CategoryType.EXPENSE ? AppColors.expense : Colors.white24),
+                                border: Border.all(
+                                  color: _selectedType == CategoryType.EXPENSE
+                                      ? AppColors.expense
+                                      : (Theme.of(context).brightness == Brightness.dark ? Colors.white24 : Colors.black26),
+                                ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.arrow_upward, size: 16, color: _selectedType == CategoryType.EXPENSE ? AppColors.expense : AppColors.textSecondary),
+                                  Icon(
+                                    Icons.arrow_upward,
+                                    size: 16,
+                                    color: _selectedType == CategoryType.EXPENSE
+                                        ? AppColors.expense
+                                        : (Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary),
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     'Expense',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: _selectedType == CategoryType.EXPENSE ? AppColors.expense : AppColors.textSecondary,
+                                      color: _selectedType == CategoryType.EXPENSE
+                                          ? AppColors.expense
+                                          : (Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary),
                                     ),
                                   ),
                                 ],
@@ -125,19 +137,31 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               decoration: BoxDecoration(
                                 color: _selectedType == CategoryType.INCOME ? AppColors.income.withOpacity(0.12) : Colors.transparent,
-                                border: Border.all(color: _selectedType == CategoryType.INCOME ? AppColors.income : Colors.white24),
+                                border: Border.all(
+                                  color: _selectedType == CategoryType.INCOME
+                                      ? AppColors.income
+                                      : (Theme.of(context).brightness == Brightness.dark ? Colors.white24 : Colors.black26),
+                                ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.arrow_downward, size: 16, color: _selectedType == CategoryType.INCOME ? AppColors.income : AppColors.textSecondary),
+                                  Icon(
+                                    Icons.arrow_downward,
+                                    size: 16,
+                                    color: _selectedType == CategoryType.INCOME
+                                        ? AppColors.income
+                                        : (Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary),
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     'Income',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: _selectedType == CategoryType.INCOME ? AppColors.income : AppColors.textSecondary,
+                                      color: _selectedType == CategoryType.INCOME
+                                          ? AppColors.income
+                                          : (Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary),
                                     ),
                                   ),
                                 ],
@@ -192,13 +216,18 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Delete Category?'),
         content: const Text('This will delete this category. Any transactions linked to it may be uncategorized.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary)),
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+              ),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.expense),
@@ -237,7 +266,7 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -258,7 +287,7 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                         final isLocked = cat.isSystem && !isAdmin;
 
                         return Card(
-                          color: AppColors.darkCard,
+                          color: Theme.of(context).cardColor,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           margin: const EdgeInsets.only(bottom: 12),
                           child: ListTile(
@@ -276,7 +305,10 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                             ),
                             subtitle: Text(
                               cat.isSystem ? 'System Default' : 'Custom User Category',
-                              style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                fontSize: 12,
+                              ),
                             ),
                             trailing: isLocked
                                 ? const Icon(Icons.lock_outline, size: 20, color: AppColors.textMuted)
@@ -284,7 +316,11 @@ class _CategoryManagementScreenState extends State<CategoryManagementScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       IconButton(
-                                        icon: const Icon(Icons.edit_outlined, size: 20, color: AppColors.textSecondary),
+                                        icon: Icon(
+                                          Icons.edit_outlined,
+                                          size: 20,
+                                          color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                        ),
                                         onPressed: () => _openCategoryForm(cat),
                                       ),
                                       IconButton(

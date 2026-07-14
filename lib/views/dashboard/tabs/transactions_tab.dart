@@ -52,6 +52,7 @@ class _TransactionsTabState extends State<TransactionsTab> {
     final transactionProvider = Provider.of<TransactionProvider>(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Transactions'),
         backgroundColor: Colors.transparent,
@@ -115,7 +116,7 @@ class _TransactionsTabState extends State<TransactionsTab> {
                               final isExpense = tx.category?.type == CategoryType.EXPENSE || tx.category == null;
 
                               return Card(
-                                color: AppColors.darkCard,
+                                color: Theme.of(context).cardColor,
                                 margin: const EdgeInsets.only(bottom: 12),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                                 child: ListTile(
@@ -133,7 +134,10 @@ class _TransactionsTabState extends State<TransactionsTab> {
                                   ),
                                   subtitle: Text(
                                     '${tx.category?.name ?? "General"} • ${tx.transactionDate}',
-                                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                                    style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                   trailing: Text(
                                     '${isExpense ? "-" : "+"}${_formatCurrency(tx.amount)}',
@@ -165,7 +169,7 @@ class _TransactionsTabState extends State<TransactionsTab> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: AppColors.darkCard,
+          backgroundColor: Theme.of(context).cardColor,
           title: const Text('Sort Transactions'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -216,7 +220,7 @@ class _TransactionsTabState extends State<TransactionsTab> {
   void _showTransactionDetails(TransactionModel tx) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.darkCard,
+      backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         final isExpense = tx.category?.type == CategoryType.EXPENSE;
@@ -231,7 +235,11 @@ class _TransactionsTabState extends State<TransactionsTab> {
                 children: [
                   Text(
                     tx.category?.name ?? 'General',
-                    style: const TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.bold, fontSize: 13),
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
                   ),
                   Text(
                     tx.transactionDate,
@@ -242,7 +250,11 @@ class _TransactionsTabState extends State<TransactionsTab> {
               const SizedBox(height: 16),
               Text(
                 tx.notes.isNotEmpty ? tx.notes : 'No description provided',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
@@ -256,7 +268,13 @@ class _TransactionsTabState extends State<TransactionsTab> {
               const SizedBox(height: 24),
               // Receipt Image if any
               if (tx.fileUrl != null && tx.fileUrl!.isNotEmpty) ...[
-                const Text('Receipt Attachment:', style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.bold)),
+                Text(
+                  'Receipt Attachment:',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 8),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
@@ -312,13 +330,18 @@ class _TransactionsTabState extends State<TransactionsTab> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: Theme.of(context).cardColor,
         title: const Text('Delete Transaction?'),
         content: const Text('Are you sure you want to permanently delete this logger entry?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary)),
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+              ),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.expense),
@@ -343,7 +366,7 @@ class _TransactionsTabState extends State<TransactionsTab> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.darkCard,
+      backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         return _TransactionForm(initialTx: initialTx, onSaved: _fetchData);
@@ -474,7 +497,11 @@ class _TransactionFormState extends State<_TransactionForm> {
             children: [
               Text(
                 isEdit ? 'Edit Transaction' : 'Add Transaction',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                ),
               ),
               const SizedBox(height: 24),
 
@@ -501,7 +528,7 @@ class _TransactionFormState extends State<_TransactionForm> {
                 value: categories.any((cat) => cat.id == _selectedCategoryId)
                     ? _selectedCategoryId
                     : null,
-                dropdownColor: AppColors.darkCard,
+                dropdownColor: Theme.of(context).cardColor,
                 decoration: const InputDecoration(
                   hintText: 'Select Category',
                   prefixIcon: Icon(Icons.category_outlined, color: AppColors.textMuted),
@@ -545,8 +572,13 @@ class _TransactionFormState extends State<_TransactionForm> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                   decoration: BoxDecoration(
-                    color: AppColors.darkCard,
-                    border: Border.all(color: Colors.white24, width: 1),
+                    color: Theme.of(context).cardColor,
+                    border: Border.all(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white24
+                          : Colors.black26,
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -555,7 +587,10 @@ class _TransactionFormState extends State<_TransactionForm> {
                       const SizedBox(width: 12),
                       Text(
                         DateFormat('yyyy-MM-dd').format(_selectedDate),
-                        style: const TextStyle(color: AppColors.textPrimary, fontSize: 15),
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyLarge?.color ?? AppColors.textPrimary,
+                          fontSize: 15,
+                        ),
                       ),
                     ],
                   ),
@@ -582,7 +617,10 @@ class _TransactionFormState extends State<_TransactionForm> {
                       _imagePath != null
                           ? 'Image selected!'
                           : (isEdit && widget.initialTx?.fileUrl != null ? 'Has online receipt' : 'Add invoice image receipt?'),
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyMedium?.color ?? AppColors.textSecondary,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 12),

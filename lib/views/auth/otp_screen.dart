@@ -5,7 +5,11 @@ import '../../providers/auth_provider.dart';
 import '../dashboard/dashboard_screen.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  /// When [email] is provided (e.g. navigating from registration), the screen
+  /// skips the email-entry step and auto-triggers OTP sending.
+  final String? email;
+
+  const OtpScreen({super.key, this.email});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -16,8 +20,18 @@ class _OtpScreenState extends State<OtpScreen> {
   final _codeFormKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _codeController = TextEditingController();
-  
+
   bool _otpSent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.email != null && widget.email!.isNotEmpty) {
+      _emailController.text = widget.email!;
+      // Auto-send OTP after the first frame so the provider is available
+      WidgetsBinding.instance.addPostFrameCallback((_) => _sendOtp());
+    }
+  }
 
   @override
   void dispose() {

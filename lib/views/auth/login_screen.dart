@@ -4,7 +4,7 @@ import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
 import 'register_screen.dart';
 import 'forgot_password_screen.dart';
-import 'otp_screen.dart';
+import 'social_auth_button.dart';
 import '../dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -198,24 +198,68 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                     const SizedBox(height: 24),
 
-                    // OTP Option
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Colors.white24),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+
+
+                    // ─────── Social sign-in ───────
+                    Row(
+                      children: [
+                        const Expanded(child: Divider(color: Colors.white24)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            'or continue with',
+                            style: TextStyle(
+                              color: AppColors.textMuted,
+                              fontSize: 13,
+                            ),
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const OtpScreen()),
-                        );
+                        const Expanded(child: Divider(color: Colors.white24)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+
+                    SocialAuthButton(
+                      label: 'Sign in with Google',
+                      iconAsset: 'assets/images/google.png',
+                      isLoading: authProvider.isLoading,
+                      onPressed: () async {
+                        final success = await authProvider.loginWithGoogle();
+                        if (mounted && success) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (_) => const DashboardScreen()),
+                          );
+                        } else if (mounted && authProvider.error != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(authProvider.error!),
+                              backgroundColor: AppColors.expense,
+                            ),
+                          );
+                        }
                       },
-                      child: const Text(
-                        'Login/Verify with OTP',
-                        style: TextStyle(color: AppColors.textPrimary),
-                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    SocialAuthButton(
+                      label: 'Sign in with Facebook',
+                      iconAsset: 'assets/images/facebook.png',
+                      isLoading: authProvider.isLoading,
+                      onPressed: () async {
+                        final success = await authProvider.loginWithFacebook();
+                        if (mounted && success) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (_) => const DashboardScreen()),
+                          );
+                        } else if (mounted && authProvider.error != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(authProvider.error!),
+                              backgroundColor: AppColors.expense,
+                            ),
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 24),
 
