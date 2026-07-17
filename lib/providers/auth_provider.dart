@@ -1,8 +1,14 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import '../models/app_models.dart';
 import '../repositories/auth_repository.dart';
+
+/// Your OAuth 2.0 **Web** client ID from Google Cloud Console.
+/// Go to: https://console.cloud.google.com → APIs & Services → Credentials
+/// Copy the "Web client (auto created by Google Service)" client ID.
+const _googleWebClientId = '568712307148-7n0lmvjvv5nf9ejiv6ajqhvhms084nkn.apps.googleusercontent.com';
 
 class AuthProvider extends ChangeNotifier {
   final AuthRepository authRepository;
@@ -266,33 +272,56 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     _setError(null);
     try {
-      final googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+      final googleSignIn = GoogleSignIn(
+        scopes: ['email', 'profile', 'openid'],
+        // Web: clientId is required; serverClientId must NOT be passed (crashes on web).
+        // Mobile: clientId is null (read from google-services.json);
+        //         serverClientId is REQUIRED to receive a non-null idToken.
+        clientId: kIsWeb ? _googleWebClientId : null,
+        serverClientId: kIsWeb ? null : _googleWebClientId,
+      );
+
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        // User cancelled the sign-in
+        debugPrint('[Google] Sign-in cancelled by user');
         _setLoading(false);
         return false;
       }
+      debugPrint('[Google] Got user: ${googleUser.email}');
       final googleAuth = await googleUser.authentication;
       final idToken = googleAuth.idToken;
-      if (idToken == null) {
-        throw Exception('Could not get Google ID token');
+      final accessToken = googleAuth.accessToken;
+      
+      debugPrint('[Google] idToken: ${idToken == null ? 'NULL ❌' : 'OK ✅'}');
+      debugPrint('[Google] accessToken: ${accessToken == null ? 'NULL ❌' : 'OK ✅'}');
+      
+      if (idToken == null && accessToken == null) {
+        throw Exception('Could not get Google ID token or Access token');
       }
-      final result = await authRepository.loginWithGoogle(idToken);
+      
+      final result = await authRepository.loginWithGoogle(
+        idToken: idToken,
+        accessToken: accessToken,
+      );
+      debugPrint('[Google] Backend result keys: ${result.keys.toList()}');
+      debugPrint('[Google] token value: "${result['token']}", user: ${result['user']}');
       _isAuthenticated = true;
       if (result['user'] != null) {
         _currentUser = result['user'] as UserModel;
       } else {
         _currentUser = await authRepository.getProfile();
       }
+      notifyListeners(); // Notify immediately so AuthWrapper rebuilds
       return true;
     } catch (e) {
+      debugPrint('[Google] ERROR: $e');
       _setError(e.toString().replaceAll('Exception: ', ''));
       return false;
     } finally {
       _setLoading(false);
     }
   }
+
 
   Future<bool> loginWithFacebook() async {
     _setLoading(true);

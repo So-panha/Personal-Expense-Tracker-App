@@ -207,10 +207,11 @@ class AuthRepository {
     }
   }
 
-  Future<Map<String, dynamic>> loginWithGoogle(String idToken) async {
+  Future<Map<String, dynamic>> loginWithGoogle({String? idToken, String? accessToken}) async {
     try {
       final response = await apiClient.dio.post('/auth/google', data: {
-        'idToken': idToken,
+        if (idToken != null) 'idToken': idToken,
+        if (accessToken != null) 'accessToken': accessToken,
       });
       final envelope = response.data as Map<String, dynamic>;
       final data = (envelope['data'] as Map<String, dynamic>?) ?? envelope;
@@ -227,6 +228,7 @@ class AuthRepository {
       throw Exception(_getErrorMessage(e));
     }
   }
+
 
   Future<Map<String, dynamic>> loginWithFacebook(String accessToken) async {
     try {

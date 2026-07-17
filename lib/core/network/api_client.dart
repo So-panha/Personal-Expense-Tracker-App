@@ -9,14 +9,17 @@ class ApiClient {
   static String get defaultBaseUrl {
     if (kIsWeb) {
       // return 'https://ant-g2-pet.tt.linkpc.net/api/v1';
-      return 'http://localhost:3000/api/v1';
+      // return 'http://localhost:3000/api/v1';
+      return 'https://personal-expense-tracker-app-backend-ppau.onrender.com/api/v1';
       
     }
     // Android emulator loops back to machine via 10.0.2.2
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'http://10.0.2.2:3000/api/v1';
+      //  return 'http://localhost:3000/api/v1';
+      return 'https://personal-expense-tracker-app-backend-ppau.onrender.com/api/v1';
     }
-    return 'http://localhost:3000/api/v1';
+    // return 'http://localhost:3000/api/v1';
+    return 'https://personal-expense-tracker-app-backend-ppau.onrender.com/api/v1';
   }
 
   late final Dio dio;

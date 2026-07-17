@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:provider/provider.dart';
 
 import 'core/network/api_client.dart';
@@ -21,8 +23,19 @@ import 'providers/theme_provider.dart';
 import 'views/auth/login_screen.dart';
 import 'views/dashboard/dashboard_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // flutter_facebook_auth requires explicit initialization on web/desktop.
+  // Without this the Facebook login button does nothing on web.
+  if (kIsWeb) {
+    await FacebookAuth.instance.webAndDesktopInitialize(
+      appId: '1708842956992278',
+      cookie: true,
+      xfbml: true,
+      version: 'v19.0',
+    );
+  }
 
   final apiClient = ApiClient();
 
